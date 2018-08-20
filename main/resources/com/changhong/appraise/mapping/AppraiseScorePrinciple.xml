@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.changhong.appraise.mapper.AppraiseScorePrincipleMapper" >
+  <resultMap id="BaseResultMap" type="com.changhong.appraise.model.AppraiseScorePrinciple" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="scorePrinciple" property="scoreprinciple" jdbcType="VARCHAR" />
+    <result column="normCode" property="normcode" jdbcType="VARCHAR" />
+    <result column="normName" property="normname" jdbcType="VARCHAR" />
+    <result column="companyCode" property="companycode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, scorePrinciple, normCode, normName,companyCode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from appraisescoreprinciple
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <select id="selectBynormCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from appraisescoreprinciple
+    where normCode = #{normcode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from appraisescoreprinciple
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.changhong.appraise.model.AppraiseScorePrinciple" >    <!--对应表格的查询语句 -->
+    insert into appraisescoreprinciple ( id,scorePrinciple,normCode,normName,companyCode)
+    values (#{id,jdbcType=CHAR}, #{scoreprinciple,jdbcType=VARCHAR}, #{normcode,jdbcType=VARCHAR},#{normname,jdbcType=VARCHAR},#{companycode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.changhong.appraise.model.AppraiseScorePrinciple" >
+    insert into appraisescoreprinciple
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="scoreprinciple != null" >
+        scorePrinciple,
+      </if>
+      <if test="normcode != null" >
+        normCode ,
+      </if>
+      <if test="normname != null" >
+        normName ,
+      </if>
+      <if test="companycode != null" >
+        companyCode,
+      </if>  
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="scoreprinciple != null" >
+        #{scoreprinciple,jdbcType=VARCHAR},
+      </if>
+      <if test="normcode != null" >
+        #{normcode,jdbcType=VARCHAR},
+      </if>
+      <if test="normname != null" >
+        #{normname,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        #{companycode,jdbcType=VARCHAR},
+      </if>  
+    </trim>
+  </insert>
+ 
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from appraisescoreprinciple
+    where scorePrinciple like concat(concat('%',#{scoreprinciple,jdbcType=VARCHAR}),'%')
+  </select>
+  <select id="selectAppraiseScorePrinciple" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from appraisescoreprinciple 
+  </select>
+</mapper>

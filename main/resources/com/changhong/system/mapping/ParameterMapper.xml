@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.changhong.system.mapper.ParameterMapper" >
+  <resultMap id="BaseResultMap" type="com.changhong.system.model.Parameter" >
+    <id column="Id" property="id" jdbcType="VARCHAR" />
+    <result column="BigClass" property="bigclass" jdbcType="VARCHAR" />
+    <result column="SmallClass" property="smallclass" jdbcType="VARCHAR" />
+    <result column="ParameterDesc" property="parameterdesc" jdbcType="VARCHAR" />
+    <result column="ViewType" property="viewtype" jdbcType="VARCHAR" />
+    <result column="ParameterValue" property="parametervalue" jdbcType="VARCHAR" />
+    <result column="ValueDesc" property="valuedesc" jdbcType="VARCHAR" />
+    <result column="DefaultValue" property="defaultvalue" jdbcType="VARCHAR" />
+    <result column="Sequence" property="sequence" jdbcType="INTEGER" />
+    <result column="Type" property="type" jdbcType="VARCHAR" />
+    <result column="VierFlag" property="vierflag" jdbcType="VARCHAR" />
+    <result column="ModifyUser" property="modifyuser" jdbcType="VARCHAR" />
+    <result column="ModifyDate" property="modifydate" jdbcType="DATE" />
+    <result column="CompanyCode" property="companycode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, BigClass, SmallClass, ParameterDesc, ViewType, ParameterValue, ValueDesc, DefaultValue, 
+    Sequence, Type, VierFlag, ModifyUser, ModifyDate, CompanyCode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_Parameter
+    where Id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_Parameter
+    where Id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.changhong.system.model.Parameter" >
+    insert into SYS_Parameter (Id, BigClass, SmallClass, 
+      ParameterDesc, ViewType, ParameterValue, 
+      ValueDesc, DefaultValue, Sequence, 
+      Type, VierFlag, ModifyUser, 
+      ModifyDate, CompanyCode)
+    values (#{id,jdbcType=VARCHAR}, #{bigclass,jdbcType=VARCHAR}, #{smallclass,jdbcType=VARCHAR}, 
+      #{parameterdesc,jdbcType=VARCHAR}, #{viewtype,jdbcType=VARCHAR}, #{parametervalue,jdbcType=VARCHAR}, 
+      #{valuedesc,jdbcType=VARCHAR}, #{defaultvalue,jdbcType=VARCHAR}, #{sequence,jdbcType=INTEGER}, 
+      #{type,jdbcType=VARCHAR}, #{vierflag,jdbcType=VARCHAR}, #{modifyuser,jdbcType=VARCHAR}, 
+      #{modifydate,jdbcType=DATE}, #{companycode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.changhong.system.model.Parameter" >
+    insert into SYS_Parameter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="bigclass != null" >
+        BigClass,
+      </if>
+      <if test="smallclass != null" >
+        SmallClass,
+      </if>
+      <if test="parameterdesc != null" >
+        ParameterDesc,
+      </if>
+      <if test="viewtype != null" >
+        ViewType,
+      </if>
+      <if test="parametervalue != null" >
+        ParameterValue,
+      </if>
+      <if test="valuedesc != null" >
+        ValueDesc,
+      </if>
+      <if test="defaultvalue != null" >
+        DefaultValue,
+      </if>
+      <if test="sequence != null" >
+        Sequence,
+      </if>
+      <if test="type != null" >
+        Type,
+      </if>
+      <if test="vierflag != null" >
+        VierFlag,
+      </if>
+      <if test="modifyuser != null" >
+        ModifyUser,
+      </if>
+      <if test="modifydate != null" >
+        ModifyDate,
+      </if>
+      <if test="companycode != null" >
+        CompanyCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="bigclass != null" >
+        #{bigclass,jdbcType=VARCHAR},
+      </if>
+      <if test="smallclass != null" >
+        #{smallclass,jdbcType=VARCHAR},
+      </if>
+      <if test="parameterdesc != null" >
+        #{parameterdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="viewtype != null" >
+        #{viewtype,jdbcType=VARCHAR},
+      </if>
+      <if test="parametervalue != null" >
+        #{parametervalue,jdbcType=VARCHAR},
+      </if>
+      <if test="valuedesc != null" >
+        #{valuedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultvalue != null" >
+        #{defaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="vierflag != null" >
+        #{vierflag,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyuser != null" >
+        #{modifyuser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifydate != null" >
+        #{modifydate,jdbcType=DATE},
+      </if>
+      <if test="companycode != null" >
+        #{companycode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.changhong.system.model.Parameter" >
+    update SYS_Parameter
+    <set >
+      <if test="bigclass != null" >
+        BigClass = #{bigclass,jdbcType=VARCHAR},
+      </if>
+      <if test="smallclass != null" >
+        SmallClass = #{smallclass,jdbcType=VARCHAR},
+      </if>
+      <if test="parameterdesc != null" >
+        ParameterDesc = #{parameterdesc,jdbcType=VARCHAR},
+      </if>
+      <if test="viewtype != null" >
+        ViewType = #{viewtype,jdbcType=VARCHAR},
+      </if>
+      <if test="parametervalue != null" >
+        ParameterValue = #{parametervalue,jdbcType=VARCHAR},
+      </if>
+      <if test="valuedesc != null" >
+        ValueDesc = #{valuedesc,jdbcType=VARCHAR},
+      </if>
+      <if test="defaultvalue != null" >
+        DefaultValue = #{defaultvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null" >
+        Sequence = #{sequence,jdbcType=INTEGER},
+      </if>
+      <if test="type != null" >
+        Type = #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="vierflag != null" >
+        VierFlag = #{vierflag,jdbcType=VARCHAR},
+      </if>
+      <if test="modifyuser != null" >
+        ModifyUser = #{modifyuser,jdbcType=VARCHAR},
+      </if>
+      <if test="modifydate != null" >
+        ModifyDate = #{modifydate,jdbcType=DATE},
+      </if>
+      <if test="companycode != null" >
+        CompanyCode = #{companycode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.changhong.system.model.Parameter" >
+    update SYS_Parameter
+    set BigClass = #{bigclass,jdbcType=VARCHAR},
+      SmallClass = #{smallclass,jdbcType=VARCHAR},
+      ParameterDesc = #{parameterdesc,jdbcType=VARCHAR},
+      ViewType = #{viewtype,jdbcType=VARCHAR},
+      ParameterValue = #{parametervalue,jdbcType=VARCHAR},
+      ValueDesc = #{valuedesc,jdbcType=VARCHAR},
+      DefaultValue = #{defaultvalue,jdbcType=VARCHAR},
+      Sequence = #{sequence,jdbcType=INTEGER},
+      Type = #{type,jdbcType=VARCHAR},
+      VierFlag = #{vierflag,jdbcType=VARCHAR},
+      ModifyUser = #{modifyuser,jdbcType=VARCHAR},
+      ModifyDate = #{modifydate,jdbcType=DATE},
+      CompanyCode = #{companycode,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=VARCHAR}
+  </update>
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_Parameter
+    where ParameterDesc like concat(concat('%',#{parameterdesc,jdbcType=VARCHAR}),'%')
+  </select>  
+  <select id="findAll" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_Parameter
+    where VierFlag = 1 order by Sequence asc
+  </select>
+</mapper>

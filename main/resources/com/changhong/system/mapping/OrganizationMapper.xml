@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.changhong.system.mapper.OrganizationMapper" >
+  <resultMap id="BaseResultMap" type="com.changhong.system.model.Organization" >
+    <id column="OrganizationCode" property="organizationcode" jdbcType="VARCHAR" />
+    <result column="RegionCode" property="regioncode" jdbcType="VARCHAR" />
+    <result column="OrganizationName" property="organizationname" jdbcType="VARCHAR" />
+    <result column="Father" property="father" jdbcType="VARCHAR" />
+    <result column="Address" property="address" jdbcType="VARCHAR" />
+    <result column="Phone" property="phone" jdbcType="VARCHAR" />
+    <result column="Remark" property="remark" jdbcType="VARCHAR" />
+    <result column="Path" property="path" jdbcType="VARCHAR" />
+    <result column="CompanyCode" property="companycode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    OrganizationCode, RegionCode, OrganizationName, Father, Address, Phone, Remark, Path, 
+    CompanyCode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_Organization
+    where OrganizationCode = #{organizationcode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_Organization
+    where OrganizationCode = #{organizationcode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.changhong.system.model.Organization" >
+    insert into SYS_Organization (OrganizationCode, RegionCode, OrganizationName, 
+      Father, Address, Phone, 
+      Remark, Path, CompanyCode
+      )
+    values (#{organizationcode,jdbcType=VARCHAR}, #{regioncode,jdbcType=VARCHAR}, #{organizationname,jdbcType=VARCHAR}, 
+      #{father,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR}, #{companycode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.changhong.system.model.Organization" >
+    insert into SYS_Organization
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="organizationcode != null" >
+        OrganizationCode,
+      </if>
+      <if test="regioncode != null" >
+        RegionCode,
+      </if>
+      <if test="organizationname != null" >
+        OrganizationName,
+      </if>
+      <if test="father != null" >
+        Father,
+      </if>
+      <if test="address != null" >
+        Address,
+      </if>
+      <if test="phone != null" >
+        Phone,
+      </if>
+      <if test="remark != null" >
+        Remark,
+      </if>
+      <if test="path != null" >
+        Path,
+      </if>
+      <if test="companycode != null" >
+        CompanyCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="organizationcode != null" >
+        #{organizationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="regioncode != null" >
+        #{regioncode,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationname != null" >
+        #{organizationname,jdbcType=VARCHAR},
+      </if>
+      <if test="father != null" >
+        #{father,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        #{companycode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.changhong.system.model.Organization" >
+    update SYS_Organization
+    <set >
+      <if test="regioncode != null" >
+        RegionCode = #{regioncode,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationname != null" >
+        OrganizationName = #{organizationname,jdbcType=VARCHAR},
+      </if>
+      <if test="father != null" >
+        Father = #{father,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        Address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        Phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        Remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="path != null" >
+        Path = #{path,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        CompanyCode = #{companycode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where OrganizationCode = #{organizationcode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.changhong.system.model.Organization" >
+    update SYS_Organization
+    set RegionCode = #{regioncode,jdbcType=VARCHAR},
+      OrganizationName = #{organizationname,jdbcType=VARCHAR},
+      Father = #{father,jdbcType=VARCHAR},
+      Address = #{address,jdbcType=VARCHAR},
+      Phone = #{phone,jdbcType=VARCHAR},
+      Remark = #{remark,jdbcType=VARCHAR},
+      Path = #{path,jdbcType=VARCHAR},
+      CompanyCode = #{companycode,jdbcType=VARCHAR}
+    where OrganizationCode = #{organizationcode,jdbcType=VARCHAR}
+  </update>
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_Organization
+    where OrganizationName like concat(concat('%',#{organizationname,jdbcType=VARCHAR}),'%')
+  </select>  
+  <select id="selectMaxId" resultType="java.lang.String" >
+    select MAX(OrganizationCode) from SYS_Organization
+  </select>  
+  <select id="selectOrgs" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_Organization
+  </select>  
+  <select id="queryAllByOrgId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_Organization
+    where Father = #{organizationcode,jdbcType=VARCHAR}
+  </select>  
+  
+</mapper>

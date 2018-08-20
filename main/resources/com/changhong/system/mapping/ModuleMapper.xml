@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.changhong.system.mapper.ModuleMapper" >
+  <resultMap id="BaseResultMap" type="com.changhong.system.model.Module" >
+    <id column="Id" property="id" jdbcType="CHAR" />
+    <result column="ModelName" property="modelname" jdbcType="VARCHAR" />
+    <result column="SystemId" property="systemid" jdbcType="TINYINT" />
+    <result column="ParentId" property="parentid" jdbcType="CHAR" />
+    <result column="OrderNo" property="orderno" jdbcType="INTEGER" />
+    <result column="Grade" property="grade" jdbcType="INTEGER" />
+    <result column="DllFName" property="dllfname" jdbcType="VARCHAR" />
+    <result column="ClassName" property="classname" jdbcType="VARCHAR" />
+    <result column="ModelType" property="modeltype" jdbcType="VARCHAR" />
+    <result column="ModelParameter" property="modelparameter" jdbcType="VARCHAR" />
+    <result column="IsShow" property="isshow" jdbcType="BIT" />
+    <result column="SytemType" property="sytemtype" jdbcType="VARCHAR" />
+    <result column="TransFlag" property="transflag" jdbcType="VARCHAR" />
+    <result column="MenuCode" property="menucode" jdbcType="VARCHAR" />
+    <result column="CompanyCode" property="companycode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, ModelName, SystemId, ParentId, OrderNo, Grade, DllFName, ClassName, ModelType, 
+    ModelParameter, IsShow, SytemType, TransFlag, MenuCode, CompanyCode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_Model
+    where Id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_Model
+    where Id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.changhong.system.model.Module" >
+    insert into SYS_Model (Id, ModelName, SystemId, 
+      ParentId, OrderNo, Grade, 
+      DllFName, ClassName, ModelType, 
+      ModelParameter, IsShow, SytemType, 
+      TransFlag, MenuCode, CompanyCode
+      )
+    values (#{id,jdbcType=CHAR}, #{modelname,jdbcType=VARCHAR}, #{systemid,jdbcType=TINYINT}, 
+      #{parentid,jdbcType=CHAR}, #{orderno,jdbcType=INTEGER}, #{grade,jdbcType=INTEGER}, 
+      #{dllfname,jdbcType=VARCHAR}, #{classname,jdbcType=VARCHAR}, #{modeltype,jdbcType=VARCHAR}, 
+      #{modelparameter,jdbcType=VARCHAR}, #{isshow,jdbcType=BIT}, #{sytemtype,jdbcType=VARCHAR}, 
+      #{transflag,jdbcType=VARCHAR}, #{menucode,jdbcType=VARCHAR}, #{companycode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.changhong.system.model.Module" >
+    insert into SYS_Model
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="modelname != null" >
+        ModelName,
+      </if>
+      <if test="systemid != null" >
+        SystemId,
+      </if>
+      <if test="parentid != null" >
+        ParentId,
+      </if>
+      <if test="orderno != null" >
+        OrderNo,
+      </if>
+      <if test="grade != null" >
+        Grade,
+      </if>
+      <if test="dllfname != null" >
+        DllFName,
+      </if>
+      <if test="classname != null" >
+        ClassName,
+      </if>
+      <if test="modeltype != null" >
+        ModelType,
+      </if>
+      <if test="modelparameter != null" >
+        ModelParameter,
+      </if>
+      <if test="isshow != null" >
+        IsShow,
+      </if>
+      <if test="sytemtype != null" >
+        SytemType,
+      </if>
+      <if test="transflag != null" >
+        TransFlag,
+      </if>
+      <if test="menucode != null" >
+        MenuCode,
+      </if>
+      <if test="companycode != null" >
+        CompanyCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="modelname != null" >
+        #{modelname,jdbcType=VARCHAR},
+      </if>
+      <if test="systemid != null" >
+        #{systemid,jdbcType=TINYINT},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=CHAR},
+      </if>
+      <if test="orderno != null" >
+        #{orderno,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null" >
+        #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="dllfname != null" >
+        #{dllfname,jdbcType=VARCHAR},
+      </if>
+      <if test="classname != null" >
+        #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="modeltype != null" >
+        #{modeltype,jdbcType=VARCHAR},
+      </if>
+      <if test="modelparameter != null" >
+        #{modelparameter,jdbcType=VARCHAR},
+      </if>
+      <if test="isshow != null" >
+        #{isshow,jdbcType=BIT},
+      </if>
+      <if test="sytemtype != null" >
+        #{sytemtype,jdbcType=VARCHAR},
+      </if>
+      <if test="transflag != null" >
+        #{transflag,jdbcType=VARCHAR},
+      </if>
+      <if test="menucode != null" >
+        #{menucode,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        #{companycode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.changhong.system.model.Module" >
+    update SYS_Model
+    <set >
+      <if test="modelname != null" >
+        ModelName = #{modelname,jdbcType=VARCHAR},
+      </if>
+      <if test="systemid != null" >
+        SystemId = #{systemid,jdbcType=TINYINT},
+      </if>
+      <if test="parentid != null" >
+        ParentId = #{parentid,jdbcType=CHAR},
+      </if>
+      <if test="orderno != null" >
+        OrderNo = #{orderno,jdbcType=INTEGER},
+      </if>
+      <if test="grade != null" >
+        Grade = #{grade,jdbcType=INTEGER},
+      </if>
+      <if test="dllfname != null" >
+        DllFName = #{dllfname,jdbcType=VARCHAR},
+      </if>
+      <if test="classname != null" >
+        ClassName = #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="modeltype != null" >
+        ModelType = #{modeltype,jdbcType=VARCHAR},
+      </if>
+      <if test="modelparameter != null" >
+        ModelParameter = #{modelparameter,jdbcType=VARCHAR},
+      </if>
+      <if test="isshow != null" >
+        IsShow = #{isshow,jdbcType=BIT},
+      </if>
+      <if test="sytemtype != null" >
+        SytemType = #{sytemtype,jdbcType=VARCHAR},
+      </if>
+      <if test="transflag != null" >
+        TransFlag = #{transflag,jdbcType=VARCHAR},
+      </if>
+      <if test="menucode != null" >
+        MenuCode = #{menucode,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        CompanyCode = #{companycode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.changhong.system.model.Module" >
+    update SYS_Model
+    set ModelName = #{modelname,jdbcType=VARCHAR},
+      SystemId = #{systemid,jdbcType=TINYINT},
+      ParentId = #{parentid,jdbcType=CHAR},
+      OrderNo = #{orderno,jdbcType=INTEGER},
+      Grade = #{grade,jdbcType=INTEGER},
+      DllFName = #{dllfname,jdbcType=VARCHAR},
+      ClassName = #{classname,jdbcType=VARCHAR},
+      ModelType = #{modeltype,jdbcType=VARCHAR},
+      ModelParameter = #{modelparameter,jdbcType=VARCHAR},
+      IsShow = #{isshow,jdbcType=BIT},
+      SytemType = #{sytemtype,jdbcType=VARCHAR},
+      TransFlag = #{transflag,jdbcType=VARCHAR},
+      MenuCode = #{menucode,jdbcType=VARCHAR},
+      CompanyCode = #{companycode,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=CHAR}
+  </update>
+  <select id="selectModulesByUser" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select distinct
+    m.Id, m.ModelName, m.SystemId, m.ParentId, m.OrderNo, m.Grade, m.DllFName, m.ClassName, m.ModelType, 
+    m.ModelParameter, m.IsShow, m.SytemType, m.TransFlag, m.MenuCode, m.CompanyCode
+    from SYS_Model m,SYS_RoleModel rm,SYS_Role r,SYS_Employee e,SYS_EmployeeRole er 
+    where m.Id=rm.ModelId and rm.RoleId=r.id and er.RoleId=r.Id and er.EmpCode=e.EmpCode and e.EmpCode=#{empCode,jdbcType=CHAR}
+  </select>
+  <select id="queryAllModelFather" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_Model
+    where TransFlag = #{transflag,jdbcType=VARCHAR}
+  </select>
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_Model 
+    where ModelName like concat(concat('%',#{modelname,jdbcType=VARCHAR}),'%')
+  </select>
+  <select id="selectModules" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_Model
+  </select>
+  <select id="selectModulesByRole" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_Model 
+    where ID in(select ModelId from SYS_RoleModel where RoleId=#{roleid,jdbcType=CHAR});
+  </select>  
+</mapper>

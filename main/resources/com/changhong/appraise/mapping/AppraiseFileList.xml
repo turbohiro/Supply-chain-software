@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.changhong.appraise.mapper.AppraiseFileListMapper" >
+  <resultMap id="BaseResultMap" type="com.changhong.appraise.model.AppraiseFileList" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="filename" property="filename" jdbcType="VARCHAR" />
+    <result column="filepath" property="filepath" jdbcType="VARCHAR" />
+    <result column="filecontext" property="filecontext" jdbcType="VARCHAR" />
+    <result column="normCode" property="normcode" jdbcType="VARCHAR" />
+    <result column="normName" property="normname" jdbcType="VARCHAR" />
+    <result column="remake" property="remake" jdbcType="VARCHAR" />
+    <result column="companycode" property="companycode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, filename, filepath, filecontext, normCode, normName, remake,companycode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from appraise_norm_file
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <select id="selectBynormCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from appraise_norm_file
+    where normCode = #{normcode,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from appraise_norm_file
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.changhong.appraise.model.AppraiseFileList" >    <!--对应表格的查询语句 -->
+    insert into appraise_norm_file ( id, filename, filepath, filecontext, normCode, normName,remake,companycode)
+    values (#{id,jdbcType=CHAR}, #{filename,jdbcType=VARCHAR}, #{filepath,jdbcType=VARCHAR}, #{filecontext,jdbcType=VARCHAR}, 
+      #{ normcode,jdbcType=VARCHAR},#{ normname,jdbcType=VARCHAR},#{remake,jdbcType=VARCHAR}, #{companycode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.changhong.appraise.model.AppraiseFileList" >
+    insert into appraise_norm_file
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="filename != null" >
+        filename,
+      </if>
+      <if test="filepath != null" >
+        filepath,
+      </if>
+      <if test="filecontext != null" >
+        filecontext,
+      </if>
+      <if test="normcode != null" >
+        normCode ,
+      </if>
+      <if test="normname != null" >
+        normName ,
+      </if>
+      <if test="remake != null" >
+        remake,
+      </if>
+      <if test="companycode != null" >
+        companycode,
+      </if>  
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="filename != null" >
+        #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="filecontext != null" >
+        #{filecontext,jdbcType=VARCHAR},
+      </if>
+      <if test="normcode != null" >
+        #{normcode,jdbcType=VARCHAR},
+      </if>
+      <if test="normname != null" >
+        #{normname,jdbcType=VARCHAR},
+      </if>
+      <if test="remake != null" >
+        #{remake,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        #{companycode,jdbcType=VARCHAR},
+      </if>  
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.changhong.appraise.model.AppraiseFileList" >
+    update appraise_norm_file
+    <set >
+      <if test="filename != null" >
+        filename = #{filename,jdbcType=VARCHAR},
+      </if>
+      <if test="filepath != null" >
+        filepath= #{filepath,jdbcType=VARCHAR},
+      </if>
+      <if test="filecontext != null" >
+       filecontext = #{filecontext,jdbcType=VARCHAR},
+      </if>
+      <if test="normcode != null" >
+        normCode = #{normcode,jdbcType=VARCHAR},
+      </if>
+       <if test="normname != null" >
+        normName = #{normname,jdbcType=VARCHAR},
+      </if>
+      <if test="remake != null" >
+        remake = #{remake,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        companycode  = #{companycode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.changhong.appraise.model.AppraiseFileList" >
+    update appraise_norm_file
+    set filename = #{filename,jdbcType=VARCHAR},
+      filepath = #{ filepath,jdbcType=VARCHAR},
+      filecontext = #{filecontext,jdbcType=VARCHAR},
+      normCode = #{normcode,jdbcType=VARCHAR},
+      normName = #{normname,jdbcType=VARCHAR},
+      remake = #{remake,jdbcType=VARCHAR},
+      companycode = #{companycode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+ 
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from appraise_norm_file
+    where filename like concat(concat('%',#{filename,jdbcType=VARCHAR}),'%')
+  </select>
+  <select id="selectAppraiseNorms" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from appraise_norm_file 
+  </select>
+</mapper>

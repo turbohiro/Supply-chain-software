@@ -1,0 +1,303 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.changhong.system.mapper.EmployeeMapper" >
+  <resultMap id="BaseResultMap" type="com.changhong.system.model.Employee" >
+    <id column="EmpCode" property="empcode" jdbcType="VARCHAR" />
+    <result column="EmpName" property="empname" jdbcType="VARCHAR" />
+    <result column="EmpRank" property="emprank" jdbcType="VARCHAR" />
+    <result column="ClassName" property="classname" jdbcType="VARCHAR" />
+    <result column="StationName" property="stationname" jdbcType="VARCHAR" />
+    <result column="QuitDate" property="quitdate" jdbcType="TIMESTAMP" />
+    <result column="EmpPass" property="emppass" jdbcType="VARCHAR" />
+    <result column="EmpBc" property="empbc" jdbcType="VARCHAR" />
+    <result column="SystemType" property="systemtype" jdbcType="VARCHAR" />
+    <result column="OrganizationCode" property="organizationcode" jdbcType="VARCHAR" />
+    <result column="DepartmentCode" property="departmentcode" jdbcType="VARCHAR" />
+    <result column="EmpEName" property="empename" jdbcType="VARCHAR" />
+    <result column="EmpType" property="emptype" jdbcType="VARCHAR" />
+    <result column="Email" property="email" jdbcType="VARCHAR" />
+    <result column="Phone" property="phone" jdbcType="VARCHAR" />
+    <result column="CustCode" property="custcode" jdbcType="VARCHAR" />
+    <result column="SupplierCode" property="suppliercode" jdbcType="VARCHAR" />
+    <result column="CompanyCode" property="companycode" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.changhong.system.model.Employee" extends="BaseResultMap" >
+    <result column="Photo" property="photo" jdbcType="LONGVARBINARY" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    EmpCode, EmpName, EmpRank, ClassName, StationName, QuitDate, EmpPass, EmpBc, SystemType, 
+    OrganizationCode, DepartmentCode, EmpEName, EmpType, Email, Phone, CustCode, SupplierCode, 
+    CompanyCode
+  </sql>
+  <sql id="Blob_Column_List" >
+    Photo
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from SYS_Employee
+    where EmpCode = #{empcode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_Employee
+    where EmpCode = #{empcode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.changhong.system.model.Employee" >
+    insert into SYS_Employee (EmpCode, EmpName, EmpRank, 
+      ClassName, StationName, QuitDate, 
+      EmpPass, EmpBc, SystemType, 
+      OrganizationCode, DepartmentCode, EmpEName, 
+      EmpType, Email, Phone, 
+      CustCode, SupplierCode, CompanyCode, 
+      Photo)
+    values (#{empcode,jdbcType=VARCHAR}, #{empname,jdbcType=VARCHAR}, #{emprank,jdbcType=VARCHAR}, 
+      #{classname,jdbcType=VARCHAR}, #{stationname,jdbcType=VARCHAR}, #{quitdate,jdbcType=TIMESTAMP}, 
+      #{emppass,jdbcType=VARCHAR}, #{empbc,jdbcType=VARCHAR}, #{systemtype,jdbcType=VARCHAR}, 
+      #{organizationcode,jdbcType=VARCHAR}, #{departmentcode,jdbcType=VARCHAR}, #{empename,jdbcType=VARCHAR}, 
+      #{emptype,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{custcode,jdbcType=VARCHAR}, #{suppliercode,jdbcType=VARCHAR}, #{companycode,jdbcType=VARCHAR}, 
+      #{photo,jdbcType=LONGVARBINARY})
+  </insert>
+  <insert id="insertSelective" parameterType="com.changhong.system.model.Employee" >
+    insert into SYS_Employee
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="empcode != null" >
+        EmpCode,
+      </if>
+      <if test="empname != null" >
+        EmpName,
+      </if>
+      <if test="emprank != null" >
+        EmpRank,
+      </if>
+      <if test="classname != null" >
+        ClassName,
+      </if>
+      <if test="stationname != null" >
+        StationName,
+      </if>
+      <if test="quitdate != null" >
+        QuitDate,
+      </if>
+      <if test="emppass != null" >
+        EmpPass,
+      </if>
+      <if test="empbc != null" >
+        EmpBc,
+      </if>
+      <if test="systemtype != null" >
+        SystemType,
+      </if>
+      <if test="organizationcode != null" >
+        OrganizationCode,
+      </if>
+      <if test="departmentcode != null" >
+        DepartmentCode,
+      </if>
+      <if test="empename != null" >
+        EmpEName,
+      </if>
+      <if test="emptype != null" >
+        EmpType,
+      </if>
+      <if test="email != null" >
+        Email,
+      </if>
+      <if test="phone != null" >
+        Phone,
+      </if>
+      <if test="custcode != null" >
+        CustCode,
+      </if>
+      <if test="suppliercode != null" >
+        SupplierCode,
+      </if>
+      <if test="companycode != null" >
+        CompanyCode,
+      </if>
+      <if test="photo != null" >
+        Photo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="empcode != null" >
+        #{empcode,jdbcType=VARCHAR},
+      </if>
+      <if test="empname != null" >
+        #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="emprank != null" >
+        #{emprank,jdbcType=VARCHAR},
+      </if>
+      <if test="classname != null" >
+        #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="stationname != null" >
+        #{stationname,jdbcType=VARCHAR},
+      </if>
+      <if test="quitdate != null" >
+        #{quitdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="emppass != null" >
+        #{emppass,jdbcType=VARCHAR},
+      </if>
+      <if test="empbc != null" >
+        #{empbc,jdbcType=VARCHAR},
+      </if>
+      <if test="systemtype != null" >
+        #{systemtype,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationcode != null" >
+        #{organizationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentcode != null" >
+        #{departmentcode,jdbcType=VARCHAR},
+      </if>
+      <if test="empename != null" >
+        #{empename,jdbcType=VARCHAR},
+      </if>
+      <if test="emptype != null" >
+        #{emptype,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="custcode != null" >
+        #{custcode,jdbcType=VARCHAR},
+      </if>
+      <if test="suppliercode != null" >
+        #{suppliercode,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        #{companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        #{photo,jdbcType=LONGVARBINARY},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.changhong.system.model.Employee" >
+    update SYS_Employee
+    <set >
+      <if test="empname != null" >
+        EmpName = #{empname,jdbcType=VARCHAR},
+      </if>
+      <if test="emprank != null" >
+        EmpRank = #{emprank,jdbcType=VARCHAR},
+      </if>
+      <if test="classname != null" >
+        ClassName = #{classname,jdbcType=VARCHAR},
+      </if>
+      <if test="stationname != null" >
+        StationName = #{stationname,jdbcType=VARCHAR},
+      </if>
+      <if test="quitdate != null" >
+        QuitDate = #{quitdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="emppass != null" >
+        EmpPass = #{emppass,jdbcType=VARCHAR},
+      </if>
+      <if test="empbc != null" >
+        EmpBc = #{empbc,jdbcType=VARCHAR},
+      </if>
+      <if test="systemtype != null" >
+        SystemType = #{systemtype,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationcode != null" >
+        OrganizationCode = #{organizationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentcode != null" >
+        DepartmentCode = #{departmentcode,jdbcType=VARCHAR},
+      </if>
+      <if test="empename != null" >
+        EmpEName = #{empename,jdbcType=VARCHAR},
+      </if>
+      <if test="emptype != null" >
+        EmpType = #{emptype,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        Email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        Phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="custcode != null" >
+        CustCode = #{custcode,jdbcType=VARCHAR},
+      </if>
+      <if test="suppliercode != null" >
+        SupplierCode = #{suppliercode,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        CompanyCode = #{companycode,jdbcType=VARCHAR},
+      </if>
+      <if test="photo != null" >
+        Photo = #{photo,jdbcType=LONGVARBINARY},
+      </if>
+    </set>
+    where EmpCode = #{empcode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.changhong.system.model.Employee" >
+    update SYS_Employee
+    set EmpName = #{empname,jdbcType=VARCHAR},
+      EmpRank = #{emprank,jdbcType=VARCHAR},
+      ClassName = #{classname,jdbcType=VARCHAR},
+      StationName = #{stationname,jdbcType=VARCHAR},
+      QuitDate = #{quitdate,jdbcType=TIMESTAMP},
+      EmpPass = #{emppass,jdbcType=VARCHAR},
+      EmpBc = #{empbc,jdbcType=VARCHAR},
+      SystemType = #{systemtype,jdbcType=VARCHAR},
+      OrganizationCode = #{organizationcode,jdbcType=VARCHAR},
+      DepartmentCode = #{departmentcode,jdbcType=VARCHAR},
+      EmpEName = #{empename,jdbcType=VARCHAR},
+      EmpType = #{emptype,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Phone = #{phone,jdbcType=VARCHAR},
+      CustCode = #{custcode,jdbcType=VARCHAR},
+      SupplierCode = #{suppliercode,jdbcType=VARCHAR},
+      CompanyCode = #{companycode,jdbcType=VARCHAR},
+      Photo = #{photo,jdbcType=LONGVARBINARY}
+    where EmpCode = #{empcode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.changhong.system.model.Employee" >
+    update SYS_Employee
+    set EmpName = #{empname,jdbcType=VARCHAR},
+      EmpRank = #{emprank,jdbcType=VARCHAR},
+      ClassName = #{classname,jdbcType=VARCHAR},
+      StationName = #{stationname,jdbcType=VARCHAR},
+      QuitDate = #{quitdate,jdbcType=TIMESTAMP},
+      EmpPass = #{emppass,jdbcType=VARCHAR},
+      EmpBc = #{empbc,jdbcType=VARCHAR},
+      SystemType = #{systemtype,jdbcType=VARCHAR},
+      OrganizationCode = #{organizationcode,jdbcType=VARCHAR},
+      DepartmentCode = #{departmentcode,jdbcType=VARCHAR},
+      EmpEName = #{empename,jdbcType=VARCHAR},
+      EmpType = #{emptype,jdbcType=VARCHAR},
+      Email = #{email,jdbcType=VARCHAR},
+      Phone = #{phone,jdbcType=VARCHAR},
+      CustCode = #{custcode,jdbcType=VARCHAR},
+      SupplierCode = #{suppliercode,jdbcType=VARCHAR},
+      CompanyCode = #{companycode,jdbcType=VARCHAR}
+    where EmpCode = #{empcode,jdbcType=VARCHAR}
+  </update>
+  <select id="findByAccount" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_Employee
+    where EmpName = #{empename,jdbcType=VARCHAR}
+  </select>
+
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_Employee
+    where ClassName like concat(concat('%',#{classname,jdbcType=VARCHAR}),'%')
+  </select>
+  <select id="selectMaxId" resultType="java.lang.String" >
+    select MAX(empcode) from SYS_Employee
+  </select>    
+</mapper>

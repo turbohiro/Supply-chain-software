@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.changhong.system.mapper.EmployeeOrganizationMapper" >
+  <resultMap id="BaseResultMap" type="com.changhong.system.model.EmployeeOrganization" >
+    <id column="Id" property="id" jdbcType="CHAR" />
+    <result column="EmpCode" property="empcode" jdbcType="VARCHAR" />
+    <result column="OrganizationCode" property="organizationcode" jdbcType="VARCHAR" />
+    <result column="CompanyCode" property="companycode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, EmpCode, OrganizationCode, CompanyCode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_EmployeeOrganization
+    where Id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_EmployeeOrganization
+    where Id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.changhong.system.model.EmployeeOrganization" >
+    insert into SYS_EmployeeOrganization (Id, EmpCode, OrganizationCode, 
+      CompanyCode)
+    values (#{id,jdbcType=CHAR}, #{empcode,jdbcType=VARCHAR}, #{organizationcode,jdbcType=VARCHAR}, 
+      #{companycode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.changhong.system.model.EmployeeOrganization" >
+    insert into SYS_EmployeeOrganization
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="empcode != null" >
+        EmpCode,
+      </if>
+      <if test="organizationcode != null" >
+        OrganizationCode,
+      </if>
+      <if test="companycode != null" >
+        CompanyCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="empcode != null" >
+        #{empcode,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationcode != null" >
+        #{organizationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        #{companycode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.changhong.system.model.EmployeeOrganization" >
+    update SYS_EmployeeOrganization
+    <set >
+      <if test="empcode != null" >
+        EmpCode = #{empcode,jdbcType=VARCHAR},
+      </if>
+      <if test="organizationcode != null" >
+        OrganizationCode = #{organizationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        CompanyCode = #{companycode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.changhong.system.model.EmployeeOrganization" >
+    update SYS_EmployeeOrganization
+    set EmpCode = #{empcode,jdbcType=VARCHAR},
+      OrganizationCode = #{organizationcode,jdbcType=VARCHAR},
+      CompanyCode = #{companycode,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

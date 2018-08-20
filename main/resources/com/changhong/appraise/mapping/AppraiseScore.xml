@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.changhong.appraise.mapper.AppraiseScoreMapper" >
+  <resultMap id="BaseResultMap" type="com.changhong.appraise.model.AppraiseScore" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="normCode" property="normcode" jdbcType="VARCHAR" />
+    <result column="empCode" property="empcode" jdbcType="VARCHAR" />
+    <result column="score" property="score" jdbcType="VARCHAR" />
+    <result column="remake" property="remake" jdbcType="VARCHAR" />
+    <result column="companycode" property="companycode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, normCode, empCode, score, remake, companycode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from appraise_norm_score
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <select id="selectBynormCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select 
+    <include refid="Base_Column_List" />
+    from appraise_norm_score
+    where normCode = #{normcode,jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from appraise_norm_score
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.changhong.appraise.model.AppraiseScore" >    <!--对应表格的查询语句 -->
+    insert into appraise_norm_score (id, normCode, empCode, score, remake, companycode)
+    values (#{id,jdbcType=CHAR}, #{normcode,jdbcType=VARCHAR}, #{empcode,jdbcType=VARCHAR}, #{score,jdbcType=VARCHAR}, 
+       #{remake,jdbcType=VARCHAR}, #{companycode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.changhong.appraise.model.AppraiseScore" >
+    insert into appraise_norm_score
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="normcode != null" >
+        normCode,
+      </if>
+      <if test="empcode != null" >
+        empCode,
+      </if>
+      <if test="score != null" >
+        score,
+      </if>
+      <if test="remake != null" >
+        remake,
+      </if>
+      <if test="companycode != null" >
+        companycode,
+      </if>  
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="normcode != null" >
+        #{normcode,jdbcType=VARCHAR},
+      </if>
+      <if test="empcode != null" >
+        #{empcode,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="remake != null" >
+        #{remake,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        #{companycode,jdbcType=VARCHAR},
+      </if>  
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.changhong.appraise.model.AppraiseScore" >
+    update appraise_norm_score
+    <set >
+      <if test="normcode != null" >
+        normCode = #{normcode,jdbcType=VARCHAR},
+      </if>
+      <if test="empcode != null" >
+        empCode= #{empcode,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null" >
+        score = #{score,jdbcType=VARCHAR},
+      </if>
+      <if test="remake != null" >
+        remake = #{remake,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        companycode  = #{companycode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <!-- 根据id改成根据normcode -->
+  <update id="updateByPrimaryKey" parameterType="com.changhong.appraise.model.AppraiseScore" >
+    update appraise_norm_score
+    set 
+      score = #{score,jdbcType=VARCHAR},
+      remake = #{remake,jdbcType=VARCHAR},
+      companycode = #{companycode,jdbcType=VARCHAR}
+    where normCode = #{normcode,jdbcType=VARCHAR}
+  </update>
+ <!-- 查询所有数据 -->
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from appraise_norm_score
+    where  normCode like concat(concat('%',#{normcode,jdbcType=VARCHAR}),'%')
+  </select>
+  <select id="selectAppraiseScore" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from appraise_norm_score
+  </select>
+   
+
+</mapper>

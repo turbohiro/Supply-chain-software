@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.changhong.system.mapper.RoleModelMapper" >
+  <resultMap id="BaseResultMap" type="com.changhong.system.model.RoleModel" >
+    <id column="Id" property="id" jdbcType="CHAR" />
+    <result column="RoleId" property="roleid" jdbcType="CHAR" />
+    <result column="ModelId" property="modelid" jdbcType="CHAR" />
+    <result column="CompanyCode" property="companycode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, RoleId, ModelId, CompanyCode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_RoleModel
+    where Id = #{id,jdbcType=CHAR}
+  </select>
+  <select id="selectRoleModuleByRoleId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_RoleModel
+    where RoleId = #{roleid,jdbcType=CHAR}
+  </select>  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_RoleModel
+    where Id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.changhong.system.model.RoleModel" >
+    insert into SYS_RoleModel (Id, RoleId, ModelId, CompanyCode
+      )
+    values (#{id,jdbcType=CHAR}, #{roleid,jdbcType=CHAR}, #{modelid,jdbcType=CHAR}, #{companycode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.changhong.system.model.RoleModel" >
+    insert into SYS_RoleModel
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="roleid != null" >
+        RoleId,
+      </if>
+      <if test="modelid != null" >
+        ModelId,
+      </if>
+      <if test="companycode != null" >
+        CompanyCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=CHAR},
+      </if>
+      <if test="modelid != null" >
+        #{modelid,jdbcType=CHAR},
+      </if>
+      <if test="companycode != null" >
+        #{companycode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.changhong.system.model.RoleModel" >
+    update SYS_RoleModel
+    <set >
+      <if test="roleid != null" >
+        RoleId = #{roleid,jdbcType=CHAR},
+      </if>
+      <if test="modelid != null" >
+        ModelId = #{modelid,jdbcType=CHAR},
+      </if>
+      <if test="companycode != null" >
+        CompanyCode = #{companycode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.changhong.system.model.RoleModel" >
+    update SYS_RoleModel
+    set RoleId = #{roleid,jdbcType=CHAR},
+      ModelId = #{modelid,jdbcType=CHAR},
+      CompanyCode = #{companycode,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>

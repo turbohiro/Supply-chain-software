@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.changhong.appraise.mapper.AppraiseSchemeMapper" >
+  <resultMap id="BaseResultMap" type="com.changhong.appraise.model.AppraiseScheme" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="schemeName" property="schemename" jdbcType="VARCHAR" />
+    <result column="schemeCode" property="schemecode" jdbcType="VARCHAR" />
+    <result column="schemeType" property="schemetype" jdbcType="VARCHAR" />
+    <result column="remake" property="remake" jdbcType="VARCHAR" />
+    <result column="companycode" property="companycode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, schemeName, schemeCode, schemeType, remake, companycode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from appraise_scheme
+    where id = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from appraise_scheme
+    where id = #{id,jdbcType=CHAR}
+  </delete>
+  <insert id="insert" parameterType="com.changhong.appraise.model.AppraiseScheme" >
+    insert into appraise_scheme (id, schemeName, schemeCode, schemeType, remake, companycode)
+    values (#{id,jdbcType=CHAR}, #{schemename,jdbcType=VARCHAR}, #{schemecode,jdbcType=VARCHAR}, 
+      #{schemetype,jdbcType=VARCHAR}, #{remake,jdbcType=VARCHAR}, #{companycode,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.changhong.appraise.model.AppraiseScheme" >
+    insert into appraise_scheme
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="schemename != null" >
+        schemeName,
+      </if>
+      <if test="schemecode != null" >
+        schemeCode,
+      </if>
+      <if test="schemetype != null" >
+        schemeType,
+      </if>
+      <if test="remake != null" >
+        remake,
+      </if>
+      <if test="companycode != null" >
+        companycode,
+      </if>  
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="schemename != null" >
+        #{schemename,jdbcType=VARCHAR},
+      </if>
+      <if test="schemecode != null" >
+        #{schemecode,jdbcType=VARCHAR},
+      </if>
+      <if test="schemetype != null" >
+        #{schemetype,jdbcType=VARCHAR},
+      </if>
+      <if test="remake != null" >
+        #{remake,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        #{companycode,jdbcType=VARCHAR},
+      </if>  
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.changhong.appraise.model.AppraiseScheme" >
+    update appraise_scheme
+    <set >
+      <if test="schemename != null" >
+        schemeName = #{schemename,jdbcType=VARCHAR},
+      </if>
+      <if test="schemecode != null" >
+        schemeCode= #{schemecode,jdbcType=VARCHAR},
+      </if>
+      <if test="schemetype != null" >
+        schemeType = #{schemetype,jdbcType=VARCHAR},
+      </if>
+      <if test="remake != null" >
+        remake = #{remake,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        companycode  = #{companycode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.changhong.appraise.model.AppraiseScheme" >
+    update appraise_scheme
+    set schemeName = #{schemename,jdbcType=VARCHAR},
+      schemeCode = #{schemecode,jdbcType=VARCHAR},
+      schemeType = #{schemetype,jdbcType=VARCHAR},
+      remake = #{remake,jdbcType=VARCHAR},
+      companycode = #{companycode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=CHAR}
+  </update>
+ 
+  <select id="queryAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from appraise_scheme 
+    where schemeName like concat(concat('%',#{schemename,jdbcType=VARCHAR}),'%')
+  </select>
+  <select id="selectAppraiseSchemes" resultMap="BaseResultMap" >      
+    select 
+    <include refid="Base_Column_List" />
+    from appraise_scheme 
+  </select>
+</mapper>

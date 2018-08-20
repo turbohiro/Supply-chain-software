@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.changhong.system.mapper.EmployeeRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.changhong.system.model.EmployeeRole" >
+    <id column="Id" property="id" jdbcType="CHAR" />
+    <result column="RoleId" property="roleid" jdbcType="CHAR" />
+    <result column="EmpCode" property="empcode" jdbcType="VARCHAR" />
+    <result column="CompanyCode" property="companycode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    Id, RoleId, EmpCode, CompanyCode
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_EmployeeRole
+    where Id = #{id,jdbcType=CHAR}
+  </select>
+  <select id="selectEmpRoleByUserId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from SYS_EmployeeRole
+    where EmpCode = #{empcode,jdbcType=CHAR}
+  </select>  
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_EmployeeRole
+    where Id = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByEmp" parameterType="java.lang.String" >
+    delete from SYS_EmployeeRole
+    where EmpCode = #{empcode,jdbcType=CHAR}
+  </delete>  
+  
+  <insert id="insert" parameterType="com.changhong.system.model.EmployeeRole" >
+    insert into SYS_EmployeeRole (Id, RoleId, EmpCode, 
+      CompanyCode)
+    values (#{id,jdbcType=CHAR}, #{roleid,jdbcType=CHAR}, #{empcode,jdbcType=VARCHAR}, 
+      #{companycode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.changhong.system.model.EmployeeRole" >
+    insert into SYS_EmployeeRole
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        Id,
+      </if>
+      <if test="roleid != null" >
+        RoleId,
+      </if>
+      <if test="empcode != null" >
+        EmpCode,
+      </if>
+      <if test="companycode != null" >
+        CompanyCode,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=CHAR},
+      </if>
+      <if test="empcode != null" >
+        #{empcode,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        #{companycode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.changhong.system.model.EmployeeRole" >
+    update SYS_EmployeeRole
+    <set >
+      <if test="roleid != null" >
+        RoleId = #{roleid,jdbcType=CHAR},
+      </if>
+      <if test="empcode != null" >
+        EmpCode = #{empcode,jdbcType=VARCHAR},
+      </if>
+      <if test="companycode != null" >
+        CompanyCode = #{companycode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.changhong.system.model.EmployeeRole" >
+    update SYS_EmployeeRole
+    set RoleId = #{roleid,jdbcType=CHAR},
+      EmpCode = #{empcode,jdbcType=VARCHAR},
+      CompanyCode = #{companycode,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=CHAR}
+  </update>
+</mapper>
